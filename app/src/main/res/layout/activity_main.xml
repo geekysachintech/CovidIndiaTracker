@@ -199,7 +199,17 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/topContainer"
             tools:listheader="@layout/list_header"
-            />
+            android:scrollbars="vertical"
+            >
+
+
+        </ListView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="Design &amp; Developed by www.mrmobo.com" />
 
     </RelativeLayout>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

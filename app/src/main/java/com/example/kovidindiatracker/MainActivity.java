@@ -67,13 +67,10 @@ public class MainActivity extends AppCompatActivity {
                 Toasty.success(MainActivity.this, "Refresh Done", 50, true).show();
                 swipeRefreshLayout.setRefreshing(false);
 
-
             }
         });
 
     }
-
-
 
     public void corona(String url){
         OkHttpClient client = new OkHttpClient();
@@ -97,6 +94,8 @@ public class MainActivity extends AppCompatActivity {
                 final Pojo pojo = gson.fromJson(myResponse, Pojo.class);
                 //List<Pojo> list = gson.fromJson(myResponse, pojoType);
 
+                adapter = new CustomAdapter(MainActivity.this, R.layout.item_list, dataModels);
+                adapter.clear();
 
                 for (int i = 0; i < pojo.getStatewise().size(); i++) {
                     dataModels.add(new DataModel(pojo.getStatewise().get(i).getState(),
@@ -106,26 +105,30 @@ public class MainActivity extends AppCompatActivity {
                             pojo.getStatewise().get(i).getDeaths()+ "\n↑" + pojo.getStatewise().get(i).getDeltadeaths()));
                 }
 
-
-                adapter = new CustomAdapter(MainActivity.this, R.layout.item_list, dataModels);
-
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+
 
                         confirm.setText(pojo.getStatewise().get(0).getConfirmed());
                         active.setText(pojo.getStatewise().get(0).getActive());
                         recover.setText(pojo.getStatewise().get(0).getRecovered());
                         death.setText(pojo.getStatewise().get(0).getDeaths());
 
-                       lastupdate.setText("LAST UPDATED" +"\n"+"\n"+ pojo.getStatewise().get(0).getLastupdatedtime());
+                        lastupdate.setText("LAST UPDATED" +"\n"+"\n"+ pojo.getStatewise().get(0).getLastupdatedtime());
 
                         listView.setAdapter(adapter);
+
+
                     }
                 });
 
             }
         });
+    }
+
+    public void settext(){
+
     }
 
     public long timedifference(String lastup) throws ParseException {
